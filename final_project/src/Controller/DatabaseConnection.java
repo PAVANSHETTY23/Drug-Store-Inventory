@@ -1,0 +1,36 @@
+package Controller;
+
+import java.sql.*;
+
+public class DatabaseConnection{
+	Connection con;
+	public Statement st;
+	public ResultSet result;
+	
+	public void openConnection(){
+		try{
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/drug_store_inventory", "root", "pavan");
+			st = con.createStatement();
+		}
+		
+		catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+	}
+	public void closeConnection(){
+		try{
+			if(con!=null){
+				con.close();
+			}
+			if(st!=null){
+				st.close();
+			}
+			if(result!=null){
+				result.close();
+			}
+		}
+		
+		catch(Exception e){}
+	}	
+}
